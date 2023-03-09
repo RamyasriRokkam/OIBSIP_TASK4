@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class OnlineExam {
+    private static Scanner sc = new Scanner(System.in);
+    private static final String USERNAME = "user";
+    private static final String PASSWORD = "password";
+    private static final String[] QUESTIONS = {
+        "What is the capital of India?",
+        "What is the currency of Japan?",
+        "Who is the founder of Apple?",
+        "What is the full form of RAM?",
+        "What is the full form of URL?"
+    };
+    private static final String[] ANSWERS = {
+        "New Delhi",
+        "Japanese Yen",
+        "Steve Jobs",
+        "Random Access Memory",
+        "Uniform Resource Locator"
+    };
+    private static final int NUM_QUESTIONS = QUESTIONS.length;
+    private static int score = 0;
+
+    public static void main(String[] args) {
+        if (!login()) {
+            System.out.println("\nLogin Failed. Exiting...");
+            System.exit(0);
+        }
+
+        System.out.println("\nWelcome to the Online Exam");
+        for (int i = 0; i < NUM_QUESTIONS; i++) {
+            System.out.println("Question " + (i + 1) + ": " + QUESTIONS[i]);
+            System.out.print("Enter your answer: ");
+            String answer = sc.nextLine();
+
+            if (answer.equalsIgnoreCase(ANSWERS[i])) {
+                System.out.println("Correct!");
+                score++;
+            } else {
+                System.out.println("Incorrect. The correct answer is: " + ANSWERS[i]);
+            }
+        }
+
+        System.out.println("\nExam finished.");
+        System.out.println("Your score is: " + score + " out of " + NUM_QUESTIONS);
+    }
+
+    private static boolean login() {
+        System.out.print("Enter username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
+        return username.equals(USERNAME) && password.equals(PASSWORD);
+    }
+}
